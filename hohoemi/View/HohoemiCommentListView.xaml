@@ -1,0 +1,50 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ViewModel="clr-namespace:hohoemi.ViewModel" x:Class="hohoemi.View.HohoemiCommentListView"
+        mc:Ignorable="d"
+        Title="コメントビューア" Height="450" Width="800" Icon="favicon.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <CheckBox x:Name="autoScroll"
+                  Margin="5"
+                  IsChecked="True"
+                  VerticalContentAlignment="Center"
+                  Grid.Row="0"/>
+            <Label Content="自動スクロールを有効にする"
+                   VerticalContentAlignment="Center"
+                   Grid.Column="1" />
+        </Grid>
+
+        <ListView x:Name="commentList"
+            ItemsSource="{Binding Comments}" 
+            SelectedIndex="{Binding SelectedIndex, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+            SelectionChanged="ScrollIntoView" Grid.Row="1">
+            <ListView.DataContext>
+                <ViewModel:HohoemiCommentListViewModel/>
+            </ListView.DataContext>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ユーザ名" 
+                                    DisplayMemberBinding="{Binding Sender, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Width="60"
+                                    />
+                    <GridViewColumn Header="コメント" 
+                                    DisplayMemberBinding="{Binding Resource, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Width="{Binding ActualWidth,ElementName=commentList}"
+                                    />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

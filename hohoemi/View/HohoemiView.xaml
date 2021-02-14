@@ -1,0 +1,23 @@
+﻿<Window 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hohoemi.View"
+        xmlns:ViewModel="clr-namespace:hohoemi.ViewModel" x:Class="hohoemi.View.HohoemiView"
+        mc:Ignorable="d"
+        WindowStartupLocation="Manual"
+        Height="{Binding WindowHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+        Width="{Binding WindowWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+        Top="{Binding WindowTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        Left="{Binding WindowLeft, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False" 
+        ResizeMode="NoResize" 
+        Topmost="True">
+    <Window.DataContext>
+        <ViewModel:HohoemiViewModel/>
+    </Window.DataContext>
+</Window>

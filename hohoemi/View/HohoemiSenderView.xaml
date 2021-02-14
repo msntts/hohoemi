@@ -1,0 +1,48 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ViewModel="clr-namespace:hohoemi.ViewModel" x:Class="hohoemi.View.HohoemiSenderView"
+        mc:Ignorable="d"
+        Height="110" Width="600" MaxHeight="110" MinHeight="110" Closing="Window_Closing" Icon="/hohoemi;component/Images/favicon.ico">
+    <Window.DataContext>
+        <ViewModel:HohoemiSenderViewModel/>
+    </Window.DataContext>
+
+    <Grid Margin="0" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="70"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ToolBar Margin="5,0,5,5" Grid.ColumnSpan="2">
+            <Button Margin="0" Click="SettingsImageClick">
+                <Image Source="{Binding SettingIconPath, Mode=OneTime}" />
+            </Button>
+            <Button Margin="0" Click="CommentViewerImageClick">
+                <Image Source="{Binding CommentViewerIconPath, Mode=OneTime}" />
+            </Button>
+            <Button Margin="0"
+                    Command="{Binding ChangeVisibilityCommand}" CommandParameter="{Binding CommentVisible}">
+                <Image Source="{Binding CommentOnOffIconPath, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Button>
+        </ToolBar>
+        <TextBox x:Name="comment"
+                 Margin="5,0,5,5" 
+                 AllowDrop="False" 
+                 FontSize="16" 
+                 Text="{Binding Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                 VerticalContentAlignment="Center"
+                 Grid.Column="0" Grid.Row="1"/>
+        <Button  x:Name="sendButton" 
+                 Content="送信"
+
+                 Margin="5,0,5,5" 
+                 FontSize="16"
+                 Command="{Binding SendCommand}"  CommandParameter="{Binding Comment}"  
+                 Grid.Column="1" Grid.Row="1"/>
+    </Grid>
+</Window>
